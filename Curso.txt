@@ -1,0 +1,575 @@
+Curso de React e React Native (Digital Innovation One) Não vai estar disponivel sempre
+
+
+Comandos Para Criar uma Aplicação
+
+01) Será criada uma pasta com o nome da aplicação. Então você deve estar em uma pasta superior
+    npx react-native init [nome da aplicação] (demora muito)
+02) Após criar. Para executar
+    react-native run-android ou react-native run-ios
+03) Digitar [Code .] no prompt do dos abre o visaul studio code na pasta que vc esta.
+04) Ferramenta para Controlar a digitação, identação e etc
+    yarn add eslint -D
+05) Após instalar vamos rodar para inicializar o plug-in. ANTENÇÃO: Antes apague o eslint.js que já vem quando você cria a aplicação.
+    yarn eslint --init
+06) Serão feitas varias perguntas
+    A)
+         ? How would you like to use ESLint? ...
+           To check syntax only
+         > To check syntax and find problems
+           To check syntax, find problems, and enforce code style
+
+           Escolhemos a última.
+
+    B)
+    
+         ? What type of modules does your project use? ...
+         > JavaScript modules (import/export)
+           CommonJS (require/exports)
+           None of these
+
+           Escolhemos Javacript
+
+
+    C)
+         ? Which framework does your project use? ...
+         > React
+           Vue.js
+           None of these
+
+           Escolhemos React
+
+    D)
+         ? Does your project use TypeScript? » No / Yes 
+
+           Escolhemos No
+           
+    E)
+
+         ? Where does your code run? ...  (Press <space> to select, <a> to toggle all, <i> to invert selection)
+         √ Browser
+         √ Node            Ciudado que entre ticado e não ticado é apenas a troca de cor de um verde claro (ticado) para um branco claro (não ticado)
+
+    F)
+         ? How would you like to define a style for your project? ...
+         > Use a popular style guide
+           Answer questions about your style
+           Inspect your JavaScript file(s)
+       
+           Escolhemos Use a popular style guide
+
+    G)   Perdi a pergunta G mas escolhemos [airbnb]
+
+    H)
+         ? What format do you want your config file to be in? ...
+         > JavaScript
+           YAML
+           JSON
+
+           Escolhemos Javascript
+    I)
+         ? Would you like to install them now with npm? » No / Yes   Escolhemos Yes                                                                                                              
+
+
+06) Tela com todas as perguntas e respostas
+
+      E:\CursoReact-ReactNative\Projeto\exer01>yarn eslint --init
+      yarn run v1.22.5
+      $ E:\CursoReact-ReactNative\Projeto\exer01\node_modules\.bin\eslint --init
+      √ How would you like to use ESLint? · style
+      √ What type of modules does your project use? · esm
+      √ Which framework does your project use? · react
+      √ Does your project use TypeScript? · No / Yes
+      √ Where does your code run? · No items were selected
+      √ How would you like to define a style for your project? · guide
+      √ Which style guide do you want to follow? · airbnb
+      √ What format do you want your config file to be in? · JavaScript
+      Checking peerDependencies of eslint-config-airbnb@latest
+      The config that you've selected requires the following dependencies:
+
+ - São instaladas várias bibliotecas no arquivos [package.json]
+
+          "@react-native-community/eslint-config": "^2.0.0",
+          "babel-jest": "^26.6.0",
+          "eslint": "^7.11.0",
+          "eslint-config-airbnb": "^18.2.0",
+          "eslint-plugin-import": "^2.22.1",
+          "eslint-plugin-jsx-a11y": "^6.3.1",
+          "eslint-plugin-react": "^7.21.5",
+          "eslint-plugin-react-hooks": "^4.2.0",
+
+ - Uma palicação não deve ter esses dois arquivos [package-lock.json] e [yarn.lock]. Como estamos usando o [yarn] vamos apagar o [package-lock.json]
+   e depois vamos dar o comando [yarn] (assim puro mesmo para ele atualizar tudo) 
+
+
+ - Copiei o arquivo [.eslintrc.js] da aplicação [DIOnavigation-master] para essa aplicacao [exer01]
+
+ - agora vamos instalar [yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D]  O -D é apenas para desenvolvimento
+   pois como são plugins de digitação e verificação do código não são necessários em produção
+
+ - Ele tirou a extensão do arquivo [.prettierrc.js] e modificou as linhas dentro para 
+      {
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+ 
+ - Os Seguintes plug-ins devem estar instalados no VS Code [Prettier - Code formatter], [ESLint dbaeumer.vscode-eslint] e [EditorConfig for VS Code]
+
+ - No caso do EditorConfig ainda precisamos fazer a configuração. Botão direito onde ficam os arquivos da aplicação e escolher [generate .editorConfig]
+   o arquivo [.editorconfig] é criado
+
+ - Ele colocou as seguintes linhas no [.editorconfig]
+ 
+       root = true
+
+      [*]
+      end_of_line = crlf                   (estava so lf eu coloquei crlf)
+      indent_style = space
+      indent_size = 2
+      charset = utf-8
+      trim_trailing_whitespace = true
+      insert_final_newline = true
+
+ - Biblioteca reactnavigation [reactnavigation.org]. No Docs, Getting Started tem como instalar usando npm ou yarn
+   [yarn add @react-navigation/native @react-navigation/stack]
+   Ele acrescentou o [@react-navigation/stack]
+
+   Precisou instalar também
+   [yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view]
+
+   [yarn add react-native-vector-icons]
+
+ - Após instalar o [yarn add react-native-vector-icons] precisamos alterar dois arquivos (um para o IOS e outro para o Android)
+ - No IOS ir no arquivo [ios\exer01\Info.plist] e inserir quase lá no fim
+
+   <key>UIAppFonts</key>
+	<array>
+    <string>MaterialIcons.ttf</string>
+   </array>
+
+ - No Android ir no arquivo [android\app\build.gradle] cuidado que tem outro [build.gradle] mas tem que ser o que está dentro de [app]
+
+ Inserir essas Linhas
+ 
+       project.ext.vectoricons = [
+          iconFontNames: [ 'MaterialIcons.ttf' ] // Name of the font files you want to copy
+       ]
+
+  e essa
+
+       apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+  Ficando assim com as que já estavam lá (aprox. linha 80) 
+
+
+      project.ext.react = [
+          enableHermes: false,  // clean and rebuild if changing
+      ]
+
+      project.ext.vectoricons = [
+          iconFontNames: [ 'MaterialIcons.ttf' ] // Name of the font files you want to copy
+      ]
+
+      apply from: "../../node_modules/react-native/react.gradle"
+      apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+ - Criando a Pasta [src] e já colocando um arquivo lá [index.js]
+ - Mais instalações
+   [yarn add styled-components]
+   [yarn add axios prop-types]
+   [yarn global add json-server]
+   [yarn add react-native-webview]
+ - O arquivo [server.json] foi criado fora da estrutura de pastas pq como ele vai ser atualizado toda hora o refresh automatico da aplicação também seria atualizado
+   toda hora
+ - Atenção: na hora de levantar o servidor json colocar o seguinte comando [json-server  --host 192.168.15.14  server.json -w] o endereco IP deste computador 
+   pq na aplicação o codigo que está é esse: 
+
+
+      const api = axios.create({
+        // baseURL: 'localhost:3000', // MacOS
+         baseURL: 'http://192.168.15.14:3000', // Android
+      });
+
+   A pergunta é: Se eu carregar o servidor com um outro --host e mudar na Aplicação será que funciona?
+   
+
+
+
+
+
+Aulas 
+
+  01) Introdução ao React Native
+  A)  Conceitos Iniciais
+      Tela de exemplo de uma aplicação
+
+          import React from 'react'
+          import {View,Text} from 'react-native'
+
+          const App = () => {
+               
+               return  {
+
+                      <View>
+                                <Text>Hello DIO!</Text>
+                      </View>          
+               }
+          }
+
+          export default App
+
+  B)  Configurar no Windows
+      - Instalar o Chocolatey (Gerenciador de Pacotes e com Ele instalar: www.chocolatey.org
+            . Java 8
+            . Pyton 2
+            . Yarn1
+            . NodeJS
+      - Android Studio
+      - Visual Studio Code
+
+      - Para instalar o Chocolatey voce vai no site e procura o local do install
+        lá tem um comando  [Get-ExecutionPolicy] este comando verifica se você tem permissão para instalação
+      - Para executar esse comando abra o power shell no seu windows (abra como administrador)   
+      - Copiei o texto a seguir do site:
+        [Run Get-ExecutionPolicy. If it returns Restricted, then run Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process.]
+        como ao rodar o comando deu [bypass] deve estar tudo ok
+      - Copiei o texto a seguir do site:
+        
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        
+        Esta Linha (acima) instala o chocolatey so que o mcafee não permitiu então não instalei. Como o chocolatey é usado para instalar os outros softwares e 
+        eu já tenho quase todos entao os que eu não tiver vou instalar na mão
+
+      - Se tivesse instalado com o comando a seguir eu instalaria todos os softwares
+        
+        choco install -y nodejs-lts phyton2 jdk8
+ 
+        -y para responder [y] para as perguntas e -lts para trazer a versão mais nova do nodejs
+
+      - Apos instalar tudo. Vamos configurar as nossas váriaveis de ambiente:
+
+        JAVA_HOME      D:\Java (lá tem varias versoes. Eu escolhi a Java8 pq é a do curso)
+        ANDROID_HOME   D:\AndoridSdk
+
+        e colocar no Path (tanto o java como os caminhos android abaixo)
+
+        %ANDROID_HOME%\emulator;
+        %ANDROID_HOME%\tools;
+        %ANDROID_HOME%\tools\bin;
+        %ANDROID_HOME%\platform-tools;
+        
+
+      - Apos configurar tudo. Abri o Android Studio e criei um Android Virtual Device com o Nexus e Android 7.1
+      - Na hora de testar as aplicações vamos tentar com o celular de verdade pois o emulador consome muitos recursos
+
+      - Instalar o Visual Studio Code (Já tenho)
+      - Instalar os plug-ins (recomendou o ESLint (já tenho pois instalei Angular Essential que possui 12 sub plug-ins e o ESLint está entre os 12)
+        Recomendou o Dracula (para mudar a forma da tela (fica tudo negro), so que eu não instalei, recomendou o Material Icon Theme para colocar icones na
+        identificação dos nossos arquivos (já estava instalada e eu nem sabia)
+      - Instalar o Rocketseat React Native e Instalar tambem a Rocketseat ReactJS
+
+      - Agora para criar a aplicação. Utilizando o VS vamos abrir uma pasta (criada antecipadamente). Em seguida vamos abrir um terminal (no VS)
+        Ao abrir o terminal já deve estar na pasta que foi selecionada. No teminal executamos o comando [npx react-native init projeto1]
+        Parece que o [npx] é o mesmo que o [npm] só que já traz alguns comandos imbutidos.
+
+      - Será criada uma pasta projeto1 com toda a aplicação. Na pasta projeto1 digite [adb devices] para ver os dispositivos android disponiveis para
+        rodar a aplicação. Como eu já coloquei o meu celular em modo desenvolvedor e com depuracao USB ativada e ele está ligado via USB. Entao quando digito
+        [adb devices] aparace [LGH81515e4a096  device] que é o meu LG.
+
+      - Agora em projeto1 digite [npm run android] (Demora muuuuito)
+
+      - JSX é a sintaxe dos comandos do react (mistura entre javascript, componentes)
+
+          import React from 'react'
+          import {View,Text} from 'react-native'
+
+          const App = () => {
+               
+               const nome = "Paulo";               -- Aqui é JavaScript 
+
+               return  {
+
+                      <View>
+                                <Text>Hello {nome}</Text>        -- Aqui é HTML??? com um javascript entre {}
+                      </View>          
+               }
+          }
+
+          export default App
+
+      - ES6 nada mais é que o velho Javascript com outro nome, gerado por um comite que controla a linguagem. 
+        ES6 é apenas uma versão do javascript que trouxe muitas modificações (Estudar básico do ES6)
+
+      - criando uma aplicação na pasta de projeto chamada numeroAleatorio.
+
+      - Vá na pasta de projeto e digite [npx react-native init numeroAleatorio] (demora muuuuito)
+      - A aplicação inicia no arquivo [index.js]
+
+               /**
+                * @format
+                */
+
+               import {AppRegistry} from 'react-native';
+               import App from './App';
+               import {name as appName} from './app.json';
+
+               AppRegistry.registerComponent(appName, () => App);
+
+      - E no arquivo App.js é realmente onde está toda a nossa aplicação.
+
+        Na linha [               const App: () => React$Node = () => {    ] Está a nossa tela (todos os componentes que formam a tela)
+        Na Linha [               const styles = StyleSheet.create({       ] Estão todos os estilos usados
+
+
+
+
+               /**
+                * Sample React Native App
+                * https://github.com/facebook/react-native
+                *
+                * @format
+                * @flow strict-local
+                */
+
+               import React from 'react';
+               import {
+                 SafeAreaView,
+                 StyleSheet,
+                 ScrollView,
+                 View,
+                 Text,
+                 StatusBar,
+               } from 'react-native';
+
+               import {
+                 Header,
+                 LearnMoreLinks,
+                 Colors,
+                 DebugInstructions,
+                 ReloadInstructions,
+               } from 'react-native/Libraries/NewAppScreen';
+
+//               const App: () => React$Node = () => {                  // Esta Linha está apresentando erro. foi trocada para 
+               const App = () => {                             
+                 return (
+                   <>
+                     <StatusBar barStyle="dark-content" />
+                     <SafeAreaView>
+                       <ScrollView
+                         contentInsetAdjustmentBehavior="automatic"
+                         style={styles.scrollView}>
+                         <Header />
+                         {global.HermesInternal == null ? null : (
+                           <View style={styles.engine}>
+                             <Text style={styles.footer}>Engine: Hermes</Text>
+                           </View>
+                         )}
+                         <View style={styles.body}>
+                           <View style={styles.sectionContainer}>
+                             <Text style={styles.sectionTitle}>Step One</Text>
+                             <Text style={styles.sectionDescription}>
+                               Edit <Text style={styles.highlight}>App.js</Text> to change this
+                               screen and then come back to see your edits.
+                             </Text>
+                           </View>
+                           <View style={styles.sectionContainer}>
+                             <Text style={styles.sectionTitle}>See Your Changes</Text>
+                             <Text style={styles.sectionDescription}>
+                               <ReloadInstructions />
+                             </Text>
+                           </View>
+                           <View style={styles.sectionContainer}>
+                             <Text style={styles.sectionTitle}>Debug</Text>
+                             <Text style={styles.sectionDescription}>
+                               <DebugInstructions />
+                             </Text>
+                           </View>
+                           <View style={styles.sectionContainer}>
+                             <Text style={styles.sectionTitle}>Learn More</Text>
+                             <Text style={styles.sectionDescription}>
+                               Read the docs to discover what to do next:
+                             </Text>
+                           </View>
+                           <LearnMoreLinks />
+                         </View>
+                       </ScrollView>
+                     </SafeAreaView>
+                   </>
+                 );
+               };
+
+               const styles = StyleSheet.create({
+                 scrollView: {
+                   backgroundColor: Colors.lighter,
+                 },
+                 engine: {
+                   position: 'absolute',
+                   right: 0,
+                 },
+                 body: {
+                   backgroundColor: Colors.white,
+                 },
+                 sectionContainer: {
+                   marginTop: 32,
+                   paddingHorizontal: 24,
+                 },
+                 sectionTitle: {
+                   fontSize: 24,
+                   fontWeight: '600',
+                   color: Colors.black,
+                 },
+                 sectionDescription: {
+                   marginTop: 8,
+                   fontSize: 18,
+                   fontWeight: '400',
+                   color: Colors.dark,
+                 },
+                 highlight: {
+                   fontWeight: '700',
+                 },
+                 footer: {
+                   color: Colors.dark,
+                   fontSize: 12,
+                   fontWeight: '600',
+                   padding: 4,
+                   paddingRight: 12,
+                   textAlign: 'right',
+                 },
+               });
+
+               export default App;
+
+      - Agora vamos apagar todo o conteúdo do arquivo App.js e começar do zero
+      - Para organizar a aplicação vamos criar uma pasta [scr] onde vai estar o nosso codigo. Antes de apagar vamos passar o [App.js] para essa pasta
+        e alterar o [index.js]
+
+        [index.js] após alteração (import App from './src/App';)
+
+            /**
+             * @format
+             */
+
+            import {AppRegistry} from 'react-native';
+            import App from './src/App';
+            import {name as appName} from './app.json';
+
+            AppRegistry.registerComponent(appName, () => App);
+
+      - Depois que apagamos o conteúdo do arquivo [App.js] Digitamos as seguintes linhas Abaixo:
+
+      (*01) /* eslint-disable prettier/prettier */
+      (*02) import React, {useState} from 'react';
+      (*03) import {
+                    Text, 
+                    SafeAreaView,
+                    TouchableOpacity,
+                    StyleSheet
+                  } from 'react-native';
+
+            const App = () => {
+
+      (*04)   const [numero, setNumero] = useState(22);
+
+      (*05)   function handleNumero () {
+                const novoNumero = Math.floor(Math.random() * 100);
+                setNumero(novoNumero);
+              }
+
+      (*06)   return (
+      (*07)     <>
+                <Text>App Número Aleatório</Text>
+
+                <SafeAreaView style={style.container}>
+      (*08)         <Text style={style.numero}>{numero}</Text>
+      (*09)         <TouchableOpacity onPress={handleNumero} style={style.botao}>
+                    <Text>
+                           Gerar um Número
+                    </Text>
+                  </TouchableOpacity>
+                </SafeAreaView>
+                </>
+              );
+            };
+
+      (*10) const style = StyleSheet.create({
+
+                 container: {
+                       backgroundColor: '#405080',
+                       flex: 1,
+                       justifyContent: 'center',
+                       alignItems: 'center',
+                 },
+                 numero: {
+                   fontSize: 38,
+                   color: '#FFFFFF',
+                   fontWeight: 'bold',
+                 },
+                 botao: {
+                   backgroundColor: '#FFFFFF',
+                   width: '80%',
+                   paddingHorizontal: 5,
+                   paddingVertical: 10,
+                   borderRadius: 15,
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   marginTop: 10,
+                 },
+
+            });
+
+
+            export default App;
+
+      (*01) - Essa linha foi colocada ai pela IDE na hora que escolhi uma opção para não ficar marcando como erros os espaçoes em branco
+              Parace que esse plug-in [EsLint] fica olhando o seu codigo e levantando caracteristicas que podem ser configuradas (como muitos
+              espaços em branco). O professor disse que se eliminarmos o arquivo [.eslintrc.js] esse controle do plug-in deixa de existir.
+      (*02) - Toda aplicação deve ter esse import. Marquei essa linha devido ao [{useState}]. Parece que antes para controlar os eventos era preciso
+              trabalhar com classes. Como alguns acham que é escrever demais para pouco resultado. Essa forma permite construir um [state] e controlar
+              o evento por ele. Nesse caso essa linha esta ligada as linhas (*04), (*05) e (*09).
+      (*03) - Aqui eu importo os componentes que desejo usar na tela. Atenção aos [SafeAreaView] e [TouchableOpacity]. O primeiro é a área de tela do celular
+              mas que não inclui a tela toda (parece que em alguns celulares se vc não usar essa SafeArea eles colocam componente la no topo junto com informações
+              do propio sistema operacional. O segundo é a simulação de um botão. Como é celular então Touchable tem tudo a ver.
+      (*04) - É criado o controle de evento do click (press) do Botão. Criamos uma variavel e uma função que vai manipular essa variavel. Essa váriavel é 
+              usada no (*08) e o valor inicial sera o que estiver no [useState(22)] nesse caso o 22.
+      (*05) - A função que vai responder ao evento do click (press). Nesse caso um número randomico sera arredondado (floor) e através da rotina setNumero
+              definida em (*04) a várivel [numero] será alterada.
+      (*06) - Esse [return] é da função [const App = () => {] que deve restornar a nossa tela (montagem dos componentes para construir a tela)
+      (*07) - Dentro do return só pode existir um componente nesse exemplo nos temos um [<Text>] e um [<SafeAreaView>] isso daria erro se não fosse
+              colocado o componente [<>] (especie de componente nulo) no inicio e fechando lá no fim com [</>]
+      (*08) - É onde o nosso numero é apresentado [{numero}]
+      (*09) - É onde está o nosso botão [<TouchableOpacity] junto com o [<Text>] para apresentar o texto do botão. Podemos ver tambem a captura do 
+              evento  on Press (ou o click no botão) [onPress={nome da Função}]
+      (*10) - Contém todos os estilos usados nos componentes da nossa tela.
+
+      - Flexbox - Permite um layout consistente em diversos tamanho de tela.
+
+      - Criamos uma nova aplicação [AppCurriculo], criamos a pasta [src] e copiamos [App.js] para ela, alteramos o [index.js], criamos uma pasta
+        [assets] e colocamos uma foto lá.
+      - Após retirar todo o codigo de [App.js] ela ficou assim:
+
+               import React from 'react';
+               import {StyleSheet} from 'react-native';
+
+               import {} from 'react-native/Libraries/NewAppScreen';
+
+               const App = () => {
+                 return (
+                     <>
+
+                     </>
+
+
+                 );
+               };
+
+               const styles = StyleSheet.create({
+               });
+
+               export default App;
+
+
+
+
+
+
+
